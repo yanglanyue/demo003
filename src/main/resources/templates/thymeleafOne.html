@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>The first thymeleaf!</h1>
+    <!-- th:text将div里面的文本内容设置为 -->
+    <div id="one" class="thymeleafOne" th:id="${two}" th:class="${three}" th:text="${two}">
+        <!--此内容在spring boot项目中将无法显示，他将被thymeleaf引擎和controller里的相关方法构建的内容替换掉-->
+    </div>
+    </hr>
+
+    <!-- 转译和不转译的区别 -->
+    <div th:text="${one}"></div>
+    <div th:utext="${one}"></div>
+    </hr>
+
+    <!-- 遍历1：th:each每次遍历都会生成当前这个标签，3个h4 -->
+    <h4 th:text="${user}" th:each="user:${users}"></h4>
+    </hr>
+
+    <!-- 遍历2 -->
+    <h4>
+        <span  th:each="user:${users}"> [[${user}]] </span>
+    </h4>
+
+    </hr>
+</body>
+</html>
