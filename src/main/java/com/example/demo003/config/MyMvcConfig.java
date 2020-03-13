@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
+//同步到GitHub
 //使用WebMvcConfigurerAdapter扩展springMVC的功能
 @Configuration
 //全面接管springMVC，全面接管之后整个项目会造成一些莫名其妙的错误（例如访问根目录时显示白页）
