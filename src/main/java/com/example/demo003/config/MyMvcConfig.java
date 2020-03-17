@@ -29,7 +29,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/main.html").setViewName("dashboard");
             }
 
-            //注册拦截器
+            //拦截器
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 //super.addInterceptors(registry);
