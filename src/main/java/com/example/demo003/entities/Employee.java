@@ -19,6 +19,7 @@ public class Employee {
         this.email = email;
         this.gender = gender;
         this.department = department;
+        this.birth = new Date();
     }
 
     public Integer getId() {
