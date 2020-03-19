@@ -35,11 +35,11 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 //super.addInterceptors(registry);
                 //“/**”拦截任意路径下的任意请求，并排除掉允许的请求
                 registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/index.html","/","/user/login")
+                        .excludePathPatterns("/index.html","/","/user/login","/webjars/**","/asserts/**")
                 //当使用最新的webjars bootstrap 4.1.0或者4.4.1-1对项目进行渲染的时候，会出现拦截器屏蔽掉以下两个路径的问题
                 // "/asserts/**"和"/webjars/**"，必须将其手动添加上
-                        .excludePathPatterns("/webjars/**")
-                        .excludePathPatterns("/asserts/**")
+//                        .excludePathPatterns("/webjars/**")
+//                        .excludePathPatterns("/asserts/**")
                 ;
             }
 

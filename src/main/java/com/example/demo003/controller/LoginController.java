@@ -26,8 +26,9 @@ public class LoginController {
         //判断登陆成功
         //登录成功
         if(!StringUtils.isEmpty(username)&&"dangerous".equals(password)){
-            //登陆成功，防止表单重复提交，可以重定向到主页
+            //创建一个session获取登陆者相关信息，以检测登陆者合法性
             session.setAttribute("loginUser",username);
+            //登陆成功，防止表单重复提交，可以重定向到主页
             return "redirect:/main.html";
         }else {
             //登录失败

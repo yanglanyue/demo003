@@ -5,6 +5,7 @@ import com.example.demo003.entities.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class EmployeeDao {
         employees.put(employee.getId(),employee);
     }
 
+    //查询所有员工
     public Collection<Employee> getAll(){
         return employees.values();
     }
