@@ -43,58 +43,47 @@
 	</head>
 
 	<body>
-		<!--片段引入抽取的topbar-->
-		<!--三种引入方式：-->
-		<!--insert：插入，插入后会带上div标签-->
-		<!--replace：完全替换，引入的格式和抽取页面的格式一模一样-->
-		<!--include：只将引入的内容包含在div标签中-->
-		<!--模板名：使用thymeleaf的前后缀配置规则进行解析-->
+
 		<div th:replace="~{commons/bar :: topbar}"></div>
 
 		<div class="container-fluid">
 			<div class="row">
 
-				<!--选择器引入侧边栏-->
 				<div th:replace="commons/bar :: #leftbar(activeUri='emps')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
-					<h2>
-						<a  class="btn btn-sm btn-success" href="emp" th:href="@{/emp}">+ Add</a>
-						<a  class="btn btn-sm badge-info" href="test" th:href="@{/test}">Test</a>
-					</h2>
+					<form>
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Email address</label>
+							<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">Example select</label>
+							<select class="form-control" id="exampleFormControlSelect1">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlSelect2">Example multiple select</label>
+							<select multiple class="form-control" id="exampleFormControlSelect2">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Example textarea</label>
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
+					</form>
 
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>lastName</th>
-									<th>email</th>
-									<th>gender</th>
-									<th>department</th>
-									<th>birth</th>
-									<th>operation</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<tr th:each="emp:${emps}">
-									<td th:text="${emp.id}"></td>
-									<td>[[${emp.lastName}]]</td>
-									<td th:text="${emp.email}"></td>
-									<td th:text="${emp.gender}==0?'MADAM':'MAN'"></td>
-									<td th:text="${emp.department.departmentName}"></td>
-									<td th:text="${#dates.format(emp.birth, 'dd/MMM/yyyy HH:mm')}"></td>
-									<td>
-										<button class="btn btn-sm btn-primary">Edit</button>
-										<button class="btn btn-sm btn-danger">Delete</button>
-									</td>
-								</tr>
-							</tbody>
-
-						</table>
-					</div>
 				</main>
 			</div>
 		</div>

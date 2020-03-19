@@ -1,6 +1,8 @@
 package com.example.demo003.controller;
 
+import com.example.demo003.dao.DepartmentDao;
 import com.example.demo003.dao.EmployeeDao;
+import com.example.demo003.entities.Department;
 import com.example.demo003.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeDao employeeDao;
+
+    @Autowired
+    DepartmentDao departmentDao;
 
     //查询所有员工返回列表页面
     @GetMapping("/emps")
@@ -33,7 +38,15 @@ public class EmployeeController {
 
     //返回员工添加页面
     @GetMapping("/emp")
-    public String addPage(){
+    public String addPage(Model model){
+        //来到页面之前，查询出所有部门信息，在此页面显示
+        Collection<Department> departments = departmentDao.getDepartments();
+        model.addAttribute("depts",departments);
         return "emp/add";
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "emp/test";
     }
 }
