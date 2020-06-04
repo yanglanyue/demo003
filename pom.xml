@@ -85,9 +85,9 @@
         </dependency>
     </dependencies>
 
-    <!--此插件将应用打包成可执行的jar包-->
     <build>
         <plugins>
+            <!--此插件将应用打包成可执行的jar包-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
