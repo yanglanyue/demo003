@@ -7,6 +7,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.12.RELEASE</version>
+
+        <!--以当前工程的pom.xml文件为基准，引用父工程pom.xml文件的相对路径-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -76,8 +78,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.1.13.RELEASE</version>
+        </dependency>
     </dependencies>
 
+    <!--此插件将应用打包成可执行的jar包-->
     <build>
         <plugins>
             <plugin>

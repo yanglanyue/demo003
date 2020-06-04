@@ -12,10 +12,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Locale;
 
+//来标注一个主程序类，说明这是一个spring boot应用
 @SpringBootApplication
 public class Demo003Application {
 
     public static void main(String[] args) {
+
+        //spring boot应用启动起来
         SpringApplication.run(Demo003Application.class, args);
     }
 
