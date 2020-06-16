@@ -20,7 +20,7 @@ public class HelloController {
 
 //    @RequestMapping({"/","/index.html"})
 //    public String topPage(){
-//        return "index";
+//        return "login2";
 //    }
 
     //在页面中查询数据并展示
