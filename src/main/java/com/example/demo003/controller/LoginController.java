@@ -33,7 +33,7 @@ public class LoginController {
         }else {
             //登录失败
             map.put("msg","登录失败，用户名或密码错误。");
-            return "login";
+            return "login2";
         }
     }
 }

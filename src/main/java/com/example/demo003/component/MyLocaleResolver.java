@@ -21,7 +21,8 @@ public class MyLocaleResolver implements LocaleResolver {
 
         //判断language是否为空，不为空
         if(!StringUtils.isEmpty(language)){
-            //将字符串以“_”分割
+            //以“_”识别字符串并将字符串两边进行分割，然后放入String类型的字符串数组
+            //字符串数组split[0]为语言信息,split[1]为国家信息
             String[] split = language.split("_");
             locale = new Locale(split[0],split[1]);
         }
