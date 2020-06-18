@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collection;
 
@@ -43,6 +44,17 @@ public class EmployeeController {
         Collection<Department> departments = departmentDao.getDepartments();
         model.addAttribute("depts",departments);
         return "emp/add";
+    }
+
+    //添加员工
+    @PostMapping("/emp")
+    public String addEmp(){
+
+        //来到员工列表页面
+        //redirect：从定向到一个地址
+        //forward：转发到一个地址
+        //“/”代表当前项目路径
+        return "redirect:/emps";
     }
 
     @GetMapping("/test")
