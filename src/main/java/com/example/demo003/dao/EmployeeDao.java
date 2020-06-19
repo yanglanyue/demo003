@@ -2,6 +2,7 @@ package com.example.demo003.dao;
 
 import com.example.demo003.entities.Department;
 import com.example.demo003.entities.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -14,6 +15,7 @@ public class EmployeeDao {
 
     private static Map<Integer, Employee> employees = null;
 
+    @Autowired
     private DepartmentDao departmentDao;
 
     static {
