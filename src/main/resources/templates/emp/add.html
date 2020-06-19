@@ -10,10 +10,10 @@
 
     <title>Dashboard Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
-    <link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+    <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.css}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="asserts/css/dashboard.css" rel="stylesheet">
+    <link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
     <style type="text/css">
         /* Chart.js */
 
@@ -52,24 +52,37 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
+            <!--由于是二合一页面（添加和修改是在同一张页面进行），需进行判断-->
+            <!--emp.lastName是专门用作实现修改时需要的回显功能-->
+            <!--若点击添加按钮时，emp.lastName的emp为空值，系统将抛出空指针异常-->
+            <!--所以要用三元运算做判断，是否提取model里的相应参数：th:value="${emp!=null}?${emp.lastName}"-->
             <form th:action="@{/emp}" method="post">
+                <!--发送put请求修改员工数据-->
+                <!--
+                1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+                2、页面创建一个post表单
+                3、创建一个input项，name="_method";值就是我们指定的请求方式
+                -->
+                <input type="hidden" name="_method" value="put" th:if="${emp!=null}"/>
+                <input type="hidden" name="id" th:if="${emp!=null}" th:value="${emp.id}">
+
                 <div class="form-group">
                     <label>LastName</label>
-                    <input name="lastName" type="text" class="form-control" placeholder="zhangsan">
+                    <input name="lastName" type="text" class="form-control" placeholder="zhangsan" th:value="${emp!=null}?${emp.lastName}">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input name="email" type="email" class="form-control" placeholder="zhangsan@atguigu.com">
+                    <input name="email" type="email" class="form-control" placeholder="zhangsan@atguigu.com" th:value="${emp!=null}?${emp.email}">
                 </div>
                 <div class="form-group">
                     <label>Gender</label>
                     <br/>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="1">
+                        <input class="form-check-input" type="radio" name="gender" value="1" th:checked="${emp!=null}?${emp.gender==1}">
                         <label class="form-check-label">MAN</label>
                     </div>
                     <div class="form‐check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="0">
+                        <input class="form-check-input" type="radio" name="gender" value="0" th:checked="${emp!=null}?${emp.gender==0}">
                         <label class="form-check-label">MADAM</label>
                     </div>
                 </div>
@@ -77,14 +90,14 @@
                     <label>department</label>
                     <!--提交的是部门的id-->
                     <select class="form-control" name="department.id">
-                        <option th:value="${dept.id}" th:each="dept:${depts}" th:text="${dept.departmentName}"></option>
+                        <option th:value="${dept.id}" th:each="dept:${depts}" th:text="${dept.departmentName}" th:selected="${emp!=null}?${dept.id == emp.department.id}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Birth（日期以“-”分割）</label>
-                    <input name="birth" type="text" class="form-control" placeholder="zhangsan">
+                    <input name="birth" type="text" class="form-control" placeholder="zhangsan" th:value="${emp!=null}?${#dates.format(emp.birth, 'yyyy-MM-dd')}">
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary">+ Add</button>
+                <button type="submit" class="btn btn-sm btn-primary" th:text="${emp!=null}?'Done':'+ Add'"></button>
             </form>
 
         </main>

@@ -44,12 +44,12 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             }
 
             // SpringBoot重写addResourceHandlers解决resources下面静态资源无法访问
-            @Override // 对静态资源进行处理，否则boot是把所有静态资源进行拦截
-            public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                registry.addResourceHandler("/static/**")
-                        .addResourceLocations("classpath:/static/")
-                        .resourceChain(true);
-            }
+//            @Override // 对静态资源进行处理，否则boot是把所有静态资源进行拦截
+//            public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//                registry.addResourceHandler("/static/**")
+//                        .addResourceLocations("classpath:/static/")
+//                        .resourceChain(true);
+//            }
         };
         return adapter;
     }

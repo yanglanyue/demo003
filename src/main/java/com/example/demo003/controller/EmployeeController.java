@@ -7,8 +7,7 @@ import com.example.demo003.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -37,9 +36,9 @@ public class EmployeeController {
         return "emp/list";
     }
 
-    //返回员工添加页面
+    //来到员工添加页面
     @GetMapping("/emp")
-    public String addPage(Model model){
+    public String addEmpPage(Model model){
         //来到页面之前，查询出所有部门信息，在此页面显示
         Collection<Department> departments = departmentDao.getDepartments();
         model.addAttribute("depts",departments);
@@ -50,15 +49,49 @@ public class EmployeeController {
     //SpringMVC自动将请求参数和入参对象的属性进行一一绑定；要求请求参数的名字和javaBean入参的对象里面的属性名是一样的
     @PostMapping("/emp")
     public String addEmp(Employee employee){
-
-        System.out.println(employee);
-
+//        System.out.println(employee);
         employeeDao.save(employee);
 
         //来到员工列表页面
         //redirect：从定向到一个地址
         //forward：转发到一个地址
         //“/”代表当前项目路径
+        return "redirect:/emps";
+    }
+
+    //来到修改员工信息页面，查出需修改的员工，在页面回显
+    @GetMapping("/emp/{id}")
+    public String editEmpPage(
+            @PathVariable("id")
+            Integer id,
+            //回显功能需要将查询的数据保存起来，用model封装实现
+            Model model){
+
+        Employee employee = employeeDao.get(id);
+        model.addAttribute("emp",employee);
+
+        //来到页面之前，查询出所有部门信息，在此页面显示
+        Collection<Department> departments = departmentDao.getDepartments();
+        model.addAttribute("depts",departments);
+
+        //然后回到修改页面（将add页面作为添加和修改的二合一压面）
+        return "emp/add";
+    }
+
+    //修改员工信息，需要提交员工id
+    @PutMapping("/emp")
+    public String editEmp(Employee employee){
+
+//        System.out.println(employee);
+
+        employeeDao.save(employee);
+        return "redirect:/emps";
+    }
+
+    //员工删除
+    @DeleteMapping("/emp/{id}")
+    public String deleteEmp(@PathVariable("id") Integer id){
+        employeeDao.delete(id);
         return "redirect:/emps";
     }
 

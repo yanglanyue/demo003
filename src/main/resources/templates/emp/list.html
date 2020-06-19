@@ -10,10 +10,10 @@
 
 		<title>Dashboard Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="asserts/css/dashboard.css" rel="stylesheet">
+		<link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -85,17 +85,20 @@
 									<td th:text="${emp.email}"></td>
 									<td th:text="${emp.gender}==0?'MADAM':'MAN'"></td>
 									<td th:text="${emp.department.departmentName}"></td>
-									<td th:text="${#dates.format(emp.birth, 'dd/MMM/yyyy HH:mm')}"></td>
+									<!--<td th:text="${#dates.format(emp.birth, 'dd/MMM/yyyy HH:mm')}"></td>-->
+									<td th:text="${#dates.format(emp.birth, 'yyyy-MM-dd')}"></td>
 									<td>
-										<button class="btn btn-sm btn-primary">Edit</button>
-										<button class="btn btn-sm btn-danger">Delete</button>
+										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">Edit</a>
+										<button th:attr="del_uri=@{/emp/}+${emp.id}" class="btn btn-sm btn-danger deleteBtn">Delete</button>
 									</td>
 								</tr>
 							</tbody>
-
 						</table>
 					</div>
 				</main>
+				<form id="deleteEmp"  method="post">
+					<input type="hidden" name="_method" value="delete"/>
+				</form>
 			</div>
 		</div>
 
@@ -141,6 +144,13 @@
 						display: false,
 					}
 				}
+			});
+		</script>
+		<script>
+			$(".deleteBtn").click(function(){
+				//删除当前员工的
+				$("#deleteEmp").attr("action",$(this).attr("del_uri")).submit();
+				return false;
 			});
 		</script>
 
