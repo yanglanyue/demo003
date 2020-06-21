@@ -30,18 +30,18 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             }
 
             //注册拦截器
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                //super.addInterceptors(registry);
-                //“/**”拦截任意路径下的任意请求，并排除掉允许的请求
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/index.html","/","/user/login","/webjars/**","/asserts/**")
-                //当使用最新的webjars bootstrap 4.1.0或者4.4.1-1对项目进行渲染的时候，会出现拦截器屏蔽掉以下两个路径的问题
-                // "/asserts/**"和"/webjars/**"，必须将其手动添加上
-//                        .excludePathPatterns("/webjars/**")
-//                        .excludePathPatterns("/asserts/**")
-                ;
-            }
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
+//                //super.addInterceptors(registry);
+//                //“/**”拦截任意路径下的任意请求，并排除掉允许的请求
+//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+//                        .excludePathPatterns("/index.html","/","/user/login","/webjars/**","/asserts/**")
+//                //当使用最新的webjars bootstrap 4.1.0或者4.4.1-1对项目进行渲染的时候，会出现拦截器屏蔽掉以下两个路径的问题
+//                // "/asserts/**"和"/webjars/**"，必须将其手动添加上
+////                        .excludePathPatterns("/webjars/**")
+////                        .excludePathPatterns("/asserts/**")
+//                ;
+//            }
 
             // SpringBoot重写addResourceHandlers解决resources下面静态资源无法访问
 //            @Override // 对静态资源进行处理，否则boot是把所有静态资源进行拦截
