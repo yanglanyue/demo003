@@ -2,6 +2,8 @@ package com.example.demo003.config;
 
 import com.example.demo003.component.LoginHandlerInterceptor;
 import com.example.demo003.component.MyLocaleResolver;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -17,6 +19,23 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         //super.addViewControllers(registry);
         registry.addViewController("/one").setViewName("one");
+    }
+
+    /*
+    * 配置类中配置嵌入式容器
+    * SpringBoot 2.0以上版本已将EmbeddedServletContainerCustomizer替换成WebServerFactoryCustomizer<ConfigurableWebServerFactory>
+    * SpringBoot中会有很多的xxxConfigurer帮助我们进行扩展配置
+    * SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置
+    * */
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer(){
+        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+            //定制嵌入式servlet容器的相关规则
+            @Override
+            public void customize(ConfigurableWebServerFactory factory) {
+                factory.setPort(8080);
+            }
+        };
     }
 
     @Bean//将自定义映射组建注册到容器
