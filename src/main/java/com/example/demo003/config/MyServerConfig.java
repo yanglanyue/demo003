@@ -17,6 +17,7 @@ import java.util.Arrays;
 public class MyServerConfig {
 
     //注册三大组件
+    //1、注册servlet
     @Bean
     public ServletRegistrationBean myServlet(){
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(new MyServlet(),"/myServlet");
@@ -26,15 +27,17 @@ public class MyServerConfig {
         return registrationBean;
     }
 
+    //2、注册过滤器
     @Bean
     public FilterRegistrationBean myFilter(){
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new MyFilter());
-        //拦截路径
+        //拦截路径，当输入以下路径时，控制台将打印我们自己的MyFilter类中已设定好的输出
         registrationBean.setUrlPatterns(Arrays.asList("/hello","/myServlet"));
         return registrationBean;
     }
 
+    //3、注册监听器
     @Bean
     public ServletListenerRegistrationBean myListener(){
         ServletListenerRegistrationBean<MyListener> registrationBean = new ServletListenerRegistrationBean<>(new MyListener());
